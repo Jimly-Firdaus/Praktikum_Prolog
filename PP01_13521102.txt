@@ -1,0 +1,279 @@
+/*Untuk File .txt*/
+
+Bagian 1 (Fakta, Rule, dan Query)
+ 
+Query:  Istri dari Vito
+| ?- suami(vito, X).
+
+X = power
+
+Query:  Adik dari Elon Musk
+| ?- kakak(elon_musk, X).
+
+X = patrick ? 
+
+Query:  Cicit dari Gojo
+| ?- cucu(_X, gojo), anak(Y, _X).
+
+Y = anya ? 
+
+Query:  Paman atau bibi tertua dari Wesly (pilih yang tertua)
+| ?- keponakan(wesly, Y), keponakan(wesly, _X), usia(Y, _A), usia(_X, _B), \+(_B < _A).
+
+Y = van_rossum ? 
+
+Query:  Pasangan dari ipar Aqua (X adalah ipar Y jika X adalah saudara dari suami/istri Y)
+| ?- 
+menikah(_X, aqua), saudara(_X, _Y), menikah(_Y, Z).
+
+Z = vito ? 
+
+Query:  Cucu termuda dari Khelli
+| ?- cucu(X, khelli), \+kakak(X, _).
+
+X = patrick ? 
+
+Query:  Orang yang menjadi anak kedua dari keluarganya
+| ?- anak(X, _Z),\+anaksulung(X), pria(_Z),\+ (kakak(Y, X), \+anaksulung(Y)).
+
+X = bambang ? a
+
+X = power
+
+X = patrick 
+
+Query:  Orang tua yang memiliki tepat dua anak
+| ?- anak(_X, A), kakak(_X, _Y), anaksulung(_X), anakbungsu(_Y), \+ (kakak(_Z, _Y), \+(_X = _Z)).
+
+A = gojo ? a
+
+A = lovelace
+
+A = ave
+
+A = aqua
+ 
+Query:  Orang yang punya mertua
+| ?- anak(_X, _Y),  menikah(Z, _X), pria(_Y).
+
+Z = power ? a
+
+Z = vito
+
+Z = aqua
+
+Z = ave
+
+Z = wulandari
+
+Query: Wanita yang punya lebih dari 1 anak
+| ?- anak(_X, Y), saudara(_X, _Z), wanita(Y).
+
+Y = indah ? a
+
+Y = indah
+
+Y = indah
+
+Y = indah
+
+Y = indah
+
+Y = indah
+
+Y = lovelace
+
+Y = lovelace
+
+Y = aqua
+
+Y = aqua
+
+Query: Orang yang belum pernah melahirkan ketika berusia di atas 20 tahun
+| ?- usia(A, _B), (_B > 20), \+anak(_X, A), wanita(A).
+
+A = van_rossum ? a
+
+A = bambang
+
+A = elon_musk
+
+A = patrick
+
+Query: Keturunan dari Gede yang umurnya tidak lebih kecil dari 25 tahun
+| ?- keturunan(X, gede), usia(X, _B), (_B > 24).
+
+X = van_rossum ? a
+
+X = bambang
+
+X = vito
+
+X = wesly
+
+----------------------------------------------------------
+Bagian 2 (Rekursivitas)
+ 
+Query: Kombinasi 2 dari 5
+| ?- combination(5, 2, X).
+
+X = 10.0 ? 
+
+yes
+
+Query: Menukar 14 dengan pecahan 1, 2, 5
+| ?- change(X, 14).
+
+X = 4 ?
+
+yes
+
+Query: GCD dari 14 dan 18
+| ?- fpb(14, 18, X).
+
+X = 2 ?
+
+yes
+
+Query: Sisa pembagian 5 dengan 2
+| ?- mod(5, 2, X).
+
+X = 1 ? 
+
+yes
+
+Query: Mengembalikan suku ke 5 dari deret
+| ?- deret(5, Y).
+
+Y = 10 ? 
+
+yes
+
+----------------------------------------------------------
+Bagian 3 (List)
+
+Query: Mencari elemen dengan nilai minimum
+| ?- min([9, -8, -7, 11, -10], Min).
+
+Min = -10 ? 
+
+yes
+
+Query: Mencari elemen dengan nilai maksimum
+| ?- max([9, -8, -7, 11, -10], Max).
+
+Max = 11
+
+yes
+
+Query: Mencari selisih antara elemen terbesar dan elemen terkecil
+| ?- range([9, -8, -7, 11, -10], Range).
+
+Range = 21 ? 
+
+yes
+
+Query: Mencari jumlah elemen pada list
+| ?- count([9, -8, -7, 11, -10], Count).
+
+Count = 5 ? 
+
+yes
+
+Query: Mencari jumlah total elemen pada list
+| ?- sum([9, -8, -7, 11, -10], Sum).
+
+Sum = -5 ? 
+
+yes
+
+Query: Mengembalikan index sebuah elemen pada list
+| ?- getIndex([1,2,5,-2,1,-4,-7], -2, Index).
+
+Index = 4
+
+yes
+
+| ?- getIndex([1,2,5,-2,1,-2,-7], -2, Index).
+
+Index = 4
+
+yes
+
+| ?- getIndex([1,2,5,-2,1,-4,-7], 10, Index).
+
+no
+
+Query: Menukar dua buah elemen pada indeks tertentu dan mengembalikan List yang sudah diperbarui nilainya
+| ?- swap([5,6,7,8], 1, 1, Result).
+
+Result = [5,6,7,8] ? 
+
+yes
+
+| ?- swap([5,6,7,8], 4, 2, Result).
+
+Result = [5,8,7,6] ? 
+
+yes
+
+| ?- swap([5,6,7,8,9], 4, 6, Result).
+
+no
+
+Query: Memisahkan List yang di-input menjadi dua buah List berdasarkan nilai elemennya dengan aturan ganjil-genap.
+| ?- splitList([1,2,3,4,5,6], Ganjil, Genap).
+
+Ganjil = [1,3,5]
+Genap = [2,4,6]
+
+yes
+
+| ?- splitList([1,2,3,4,5,6,7], Ganjil, Genap).
+
+Ganjil = [1,3,5,7]
+Genap = [2,4,6] ? 
+
+yes
+
+----------------------------------------------------------
+Bagian 4 (Bonus)
+
+| ?- startCalculator.
+Selamat Datang di Kalkulator Prolog!
+Currently Saved Value is 0
+
+yes
+| ?- add(5).
+Old Saved Value is 0
+New Saved Value is 5
+
+yes
+| ?- subtract(7).
+Old Saved Value is 5
+New Saved Value is -2
+
+yes
+| ?- divide(-2).
+Old Saved Value is -2
+New Saved Value is 1.0
+
+yes
+| ?- multiply(0.5).
+Old Saved Value is 1.0
+New Saved Value is 0.5
+
+yes
+| ?- getValue.
+Currently Saved Value is 0.5
+
+yes
+| ?- clearCalculator.
+Old Saved Value is 0.5
+New Saved Value is 0
+
+yes
+| ?- exitCalculator.
+Terima Kasih telah Menggunakan Kalkulator Prolog.
+
+yes
